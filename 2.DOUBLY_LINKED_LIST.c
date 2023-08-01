@@ -1,6 +1,6 @@
 #include<stdio.h>
 //linkedlist single
-// 	int n = nums.length;
+
 #include<stdlib.h>
 struct Node
 {
