@@ -1,0 +1,94 @@
+#include<stdio.h>
+
+struct Node
+{
+	int data;
+	struct Node *addrprev;
+}*curr,*newnode,*top;
+void push(int);
+int  pop();
+void display();
+int main()
+{
+	int choice;
+	int n;
+	top=NULL;
+	do{
+	printf("\n1-push 2- pop 3- display");
+	printf("\nenter your choice ");
+	scanf("%d",&choice);
+	switch(choice)
+	{
+		case 1:
+			printf("\nenter number to push into stack");
+			scanf("%d",&n);
+			push(n);
+			break;
+		case 2:
+			n=pop();
+			printf("\n%d is poped",n);
+			break;
+		case 3:
+			display();
+			break;
+		default:
+			printf("\ninvaalide choice");			
+	}
+		printf("\ndo you want to continue");
+		scanf("%d",&choice);
+	}while(choice==1);
+	return 0;
+}
+
+void push(int n)
+{
+	newnode=malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrprev=top;
+	top=newnode;
+	
+}
+int  pop()
+{
+	int n;
+	if(top==NULL)
+	{
+		printf("stack is empty");
+	}
+	else
+	{
+		curr=top;
+		top=top->addrprev;
+		curr->addrprev=NULL;
+		n=curr->data;
+		free(curr);
+		return n;
+	}
+}
+
+void display()
+{
+	if(top==NULL)
+	{
+		printf("stack is empty");
+	}
+	else
+	{
+		printf("\nstack is \n");
+		curr=top;
+		while(curr !=NULL)
+		{
+			printf("%d\t",curr->data);
+			curr=curr->addrprev;
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
