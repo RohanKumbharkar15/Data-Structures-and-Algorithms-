@@ -1,0 +1,97 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+#define M 5
+int queue[M];
+int front=0;rear=0;
+void insertQ(int);
+void deleteQ();
+void displayQ();
+int main()
+{
+	int choice;
+	int data;
+	int elm;
+	
+	do{
+
+		printf("\n1-insert queue \t2- delete queue \t3- display queue \t4- exit\n");
+		printf("enter your choice");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+			case 1:
+				printf("enter number to insert data");
+				scanf("%d",&data);
+				insertQ(data);
+				break;
+			case 2:
+				deleteQ();
+				
+				break;
+			case 3:
+				displayQ();
+				break;
+			case 4:
+				printf("---THANK YOU ---");
+				break;			
+		}
+	}while(choice != 4);
+	return 0;
+}
+
+void insertQ(int data)
+{
+	if(rear==M)
+	{
+		printf("\nqueue is full ");
+		return;		//	break; is not possible for if else
+	}
+	else
+	{
+		queue[rear]=data;
+		rear++;
+	}
+}
+void deleteQ()
+{
+	int elm;
+	if(front==rear)
+	{
+	
+		printf("queue is empty");
+	//	return elm;
+	}
+	else
+	{
+		elm=queue[front];
+		printf("\n%d is poped",elm);
+		front++;
+	}
+//	return elm;
+}
+
+void displayQ()
+{
+	int i;
+	if(front==rear)
+	{
+		printf("\nqueue is empty");
+	}
+	else
+	{
+		printf("\nqueue is \n");
+		for(i=front;i<rear;i++)
+		{
+			printf("%d\t",queue[i]);
+		}
+	}
+}
+
+
+
+
+
+
+
+
