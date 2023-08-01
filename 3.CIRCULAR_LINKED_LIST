@@ -1,0 +1,237 @@
+#include<stdio.h>
+// circular linked list
+#include<stdlib.h>
+struct Node
+{
+	int data;
+	struct Node *addrnext;	
+}*curr,*newnode,*last,*prev;
+ 
+void create(int);
+void display();
+void addnext(int);
+void insertBeg(int);
+void insertMiddle(int ,int);
+int deleteBeg();
+int searchNode(int );
+int  deleteMiddle(int);
+int main()
+{
+	last=NULL;
+	int choice;
+	do{
+	
+	int n;
+	int pos,search,flag=0;
+	printf("\n1-create a linked list\n2-display\n3-insert begin\n4-insert middle\n5-delete begin\n6-search element\n7-delelet middle");
+	printf("\nenter your choice");	
+	scanf("%d",&choice);
+	switch(choice)
+	{
+		case 1:
+			printf("enter number in linkedlist");
+			scanf("%d",&n);
+			create(n);
+			break;
+//		case 2:
+//			printf("enter next node");
+//			scanf("%d",&n);
+//			addnext(n);
+//			display();
+//			
+		case 2:
+			printf("\nlinked list is \n");
+			display();
+			break;
+		case 3:
+			printf("\nenter number to insert in begin");
+			scanf("%d",&n);
+			insertBeg(n);
+			
+			break;
+		case 4:
+			printf("\nenter number and position to insert element in middle");
+			scanf("%d%d",&n,&pos);
+			insertMiddle(n,pos);
+			break;
+		case 5:
+			n=deleteBeg();
+			printf("%d is deleted ",n);
+			break;
+		case 6:
+			printf("\nenter number to search in linked list");
+			scanf("%d",&search);
+			flag=searchNode(search);
+			if(flag>0)
+			{
+				printf("\n%d is found at %d location",search,flag);
+			}
+			else
+			{
+				printf("search not found");
+			}
+			break;
+		case 7:
+			printf("enter position to delete element");
+			scanf("%d",&pos);
+			n=deleteMiddle(pos);
+			printf("%d is deleted ",n);
+			
+			break;		
+		default :
+			printf("wrong choice");				
+		}
+		printf("\ndo you want to continue press 1");
+		scanf("%d",&choice);
+	}while(choice==1);
+	
+	printf("\nthank you");
+	
+	return 0;
+}
+// create a linked list
+void create(int n)
+{
+	newnode=malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=NULL;
+	
+	if(last==NULL)
+	{
+		last=newnode;
+		last->addrnext=last;
+	}
+	else{
+		newnode->addrnext=last->addrnext;
+		last->addrnext=newnode;
+		last=newnode;
+	}
+	
+}
+//2- add next node--useful for insert beg,insert middle 
+// malloc will be declared only once
+//void addnext(int n)
+//{
+//	last->addrnext=	create(n);
+//	last=last->addrnext;
+//}
+////3 - display
+void display()
+{
+	if(last==NULL)
+	{
+		printf("\nlinked list is empty");
+	}
+	else
+	{
+		curr=last->addrnext;
+		do
+		{
+			printf("| %d | %u |--->",curr->data,curr->addrnext);
+			curr=curr->addrnext;
+		}while(curr !=last->addrnext);
+		
+	}
+}
+//4-insert begin
+void insertBeg(int n)
+{
+	newnode=malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=last->addrnext;
+	last->addrnext=newnode;
+	
+}
+// 5-insert middle
+void insertMiddle(int n,int pos)
+{
+	curr=last->addrnext;
+	int cnt=1;
+	while(cnt<pos-1)
+	{
+		curr=curr->addrnext;
+		cnt++;	
+	}
+	newnode=malloc(sizeof(struct Node));
+	newnode->data=n;
+	newnode->addrnext=curr->addrnext;
+	curr->addrnext=newnode;	
+
+}
+
+// delete begin node
+int deleteBeg()
+{
+	int n;
+	curr=last->addrnext;
+	last->addrnext=curr->addrnext;
+	
+	curr->addrnext=NULL;
+	n=curr->data;
+	free(curr);
+	return n;
+}
+//searching for element
+int searchNode(int search)
+{
+	int flag=0;
+	if(last==NULL)
+	{
+		printf("linkedlist is empty");
+	}
+	else
+	{
+		curr=last->addrnext;
+		int cnt=1;
+		do
+		{
+			if(curr->data==search)
+			{
+				flag=cnt;
+				break;
+			}
+			cnt++;
+			curr=curr->addrnext;
+		}while(curr !=last->addrnext);
+	}
+	return flag;
+}
+//8-deleete element using position
+int  deleteMiddle(int pos)
+{
+	int n;
+	curr=last->addrnext;
+	prev=NULL;
+	int cnt=1;
+	while(cnt<pos)
+	{
+		prev=curr;
+		curr=curr->addrnext;
+		cnt++;
+	}
+	prev->addrnext=curr->addrnext;
+	n=curr->data;
+	free(curr);
+	return n;
+	
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
