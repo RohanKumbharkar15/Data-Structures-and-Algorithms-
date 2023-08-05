@@ -1,0 +1,45 @@
+#include<stdio.h>
+// 	ADDITION OF 2 MATRIX
+int main()
+{
+	int m1[3][3],m2[3][3],m3[3][3];
+	int i,j;
+	
+	printf("\nenter the elements in m1");
+	for(int i=0;i<3;i++)
+	{
+		for (int j=0;j<3;j++)
+		{
+			scanf("%d",&m1[i][j]);
+		}
+	}
+	
+	printf("\nenter the elements in m2");
+	for(int i=0;i<3;i++)
+	{
+		for (int j=0;j<3;j++)
+		{
+			scanf("%d",&m2[i][j]);
+		}
+	}
+	
+	// addtion
+	for(int i=0;i<3;i++)
+	{
+		for(int j=0;j<3;j++)
+		{
+			m3[i][j]=m1[i][j]+m2[i][j];
+		}
+	}
+	printf("\n----ADDITION OF M1 AND M2---\n");
+	for(int i=0;i<3;i++)
+	{
+		for(int j=0;j<3;j++)
+		{
+			printf("%5d",m3[i][j]);
+		}
+		printf("\n");
+	}
+
+	return 0;
+}
